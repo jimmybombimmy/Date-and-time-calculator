@@ -50,6 +50,18 @@ function handleMouseMove(e) {
       }
       box.innerHTML = curNum;
       e.movementY;
-    } 
+    } else {
+        curNum = currentNumber[i]
+    }
 };
 }
+
+
+// Website buttons
+
+document.getElementById('resetButton').addEventListener('click', function() {
+    for (let i = 0; i < currentNumber.length; i++) {
+        // currentNumber[reali] = 0;
+        numBox[i].innerHTML = 0;
+    }
+})
