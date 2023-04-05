@@ -10,11 +10,11 @@
 <body>
     <button id="resetButton">Reset</button>
     <div id="content">
-        <input type="date" name="" value="">
-        <div contenteditable="true" class="numBox">0</div>
-        <div contenteditable="true" class="numBox">0</div>
-        <div contenteditable="true" class="numBox">0</div>
-        <div contenteditable="true" class="numBox">0</div>
+        <div class="dateDiv"><input type="date" class="date" id="dateBefore" name="" value=""></div>
+        <div id="day" class="numBoxFull" contenteditable="true"><p class="numBoxTop">Day</p><p class="numBox">0</p></div>
+        <div id="month" class="numBoxFull" contenteditable="true"><p class="numBoxTop">Month</p><p class="numBox">0</p></div>
+        <div id="year" class="numBoxFull" contenteditable="true"><p class="numBoxTop">Year</p><p class="numBox">0</p></div>
+        <div class="dateDiv"><input type="date" class="date" id="dateAfter" name="" value=""></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
