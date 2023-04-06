@@ -20,6 +20,17 @@
     text-align: center;
 }
 
+.date {
+    margin: 0 20px;
+}
+
+.plus {
+    width: 20px;
+    text-align: center;
+}
+
+
+
 /* .numBoxFull {
     height: 100px;
 } */
