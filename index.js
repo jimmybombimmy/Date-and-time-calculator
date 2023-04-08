@@ -4,6 +4,8 @@
 //* Tidy up the code a bit so that the repeating code never repeats
 //* Make it so that if you take away days and months 
 //it will work the same as if you increase them
+//* For some reason it gets stuck saying that newMonth is a number
+// Fix this.
 
 
 //------------------Today's Date
@@ -55,22 +57,6 @@ let dateControl = document.querySelector('input[id="dateBefore"]');
 
 // Date 
 
-// let jan = '01'; // 31;
-// let feb = '02'; // 28;
-// let febL = '02'; // 29;
-// let mar = '03'; // 31;
-// let apr = '04'; // 30;
-// let may = '05'; // 31;
-// let jun = '06'; // 30;
-// let jul = '07'; // 31;
-// let aug = '08'; // 31;
-// let sep = '09'; // 30;
-// let oct = '10'; // 31;
-// let nov = '11'; // 30;
-// let dec = '12'; // 31;
-
-let leap;
-
 let feb;
 let febN = [0, ...Array(28).keys()].map(i => i + 1)
 let febL = [0, ...Array(29).keys()].map(i => i + 1)
@@ -78,7 +64,6 @@ let febL = [0, ...Array(29).keys()].map(i => i + 1)
 const monthList = [
     [0],
     [0, ...Array(31).keys()].map(i => i + 1),
-    // [0, ...Array(28).keys()].map(i => i + 1)],
     [feb],
     [0, ...Array(31).keys()].map(i => i + 1),
     [0, ...Array(30).keys()].map(i => i + 1),
@@ -122,6 +107,8 @@ function getDate() {
     } else {
         feb = febN;
     }
+    // newMonth = parseInt(newMonth);
+    // newMonth = JSON.parse(newMonth);
     if (parseInt(newMonth) > 12) {
         // overYear = Math.floor(parseInt(newMonth) / 12);
         newYear = parseInt(newYear) + 1;
@@ -130,17 +117,38 @@ function getDate() {
         // console.log(newMonth);
         dateCorrect();
         getDate();
-    };
+    } else if ((parseInt(currentNumber[1]) < 1) && (newMonth == 1) && ((Math.abs(currentNumber[1] % 12) == oldMonth))) {
+        // console.log(newYear);
+        newYear = JSON.parse(parseInt(newYear) - 1);
+        // console.log(newYear) 
+        newMonth = parseInt(newMonth);
+        console.log(newMonth);
+        newMonth =- 1;
+        // if (oldMonth == 0) {
+        newMonth = JSON.parse(parseInt(newMonth) + 13);
+        Number.toString(newMonth);
+        // newYear = JSON.parse(parseInt(newYear) - 1);
+        // }
+        overMonth = 12;
+        // console.log(newMonth)
+        dateCorrect();
+        getDate();
+    } 
+    // else {dateCorrect()}
     if (parseInt(newDay) >= monthList[parseInt(newMonth)].length) {
         newDay = JSON.parse(parseInt(newDay) - (monthList[parseInt(newMonth)].length - 1))
         newMonth = JSON.parse(parseInt(newMonth) + 1);
         dateCorrect();
         getDate();
     }
-
+    if (parseInt(newDay < 0)) {
+        newMonth = JSON.parse(parseInt(newMonth) - 1);
+        newDay = JSON.parse(parseInt(newDay) - (monthList[parseInt(newMonth)].length + 1));
+        dateCorrect();
+        getDate();
+    }
     // dateCorrect();
-    // console.log('hello')
-    // return year, month, day;
+    // getDate();
 }
 
 
@@ -194,6 +202,7 @@ function handleMouseMove(e) {
         // console.log(currentNumber)
       } else if (newY[0] < newY[1]) {
         curNum--;
+        overMonth--;
         currentNumber[reali] = curNum;
       }
       box.innerHTML = curNum;
@@ -206,6 +215,7 @@ function handleMouseMove(e) {
     newMonth = JSON.parse(parseInt(oldMonth) + parseInt(currentNumber[1]));
     newYear = JSON.parse(parseInt(oldYear) + parseInt(currentNumber[2]));
 
+    
     dateCorrect();
     getDate();
 
